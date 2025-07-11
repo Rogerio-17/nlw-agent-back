@@ -15,6 +15,13 @@
       "when": 1752107197190,
       "tag": "0001_shallow_wolfpack",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1752190900286,
+      "tag": "0002_blushing_venus",
+      "breakpoints": true
     }
   ]
 }

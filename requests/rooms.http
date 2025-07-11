@@ -1,5 +1,0 @@
-@baseUrl = http://localhost:3333
-
-# @name create_campaign
-GET {{baseUrl}}/rooms
-Content-Type: application/json

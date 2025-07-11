@@ -1,30 +1,36 @@
-import { fastifyCors } from '@fastify/cors'
-import { fastify } from 'fastify'
+import { fastifyCors } from "@fastify/cors";
+import { fastify } from "fastify";
 import {
   serializerCompiler,
   validatorCompiler,
   type ZodTypeProvider,
-} from 'fastify-type-provider-zod'
-import { env } from './env.ts'
-import { getRoomsRoute } from './http/routes/get-rooms.ts'
+} from "fastify-type-provider-zod";
+import { env } from "./env.ts";
+import { getRoomsRoute } from "./http/routes/get-rooms.ts";
+import { createRoomRoute } from "./http/routes/create-room.ts";
+import { getRoomQuestionsRoute } from "./http/routes/get-room-questions.ts";
+import { createQuestionRoute } from "./http/routes/create-question.ts";
 
-const app = fastify().withTypeProvider<ZodTypeProvider>()
+const app = fastify().withTypeProvider<ZodTypeProvider>();
 
 app.register(fastifyCors, {
-  origin: 'http://localhost:3000',
-})
+  origin: "*",
+});
 
-app.setSerializerCompiler(serializerCompiler)
-app.setValidatorCompiler(validatorCompiler)
+app.setSerializerCompiler(serializerCompiler);
+app.setValidatorCompiler(validatorCompiler);
 
-app.get('/health', () => {
-  return { status: 'ok' }
-})
+app.get("/health", () => {
+  return { status: "ok" };
+});
 
-app.register(getRoomsRoute)
+app.register(getRoomsRoute);
+app.register(createRoomRoute);
+app.register(getRoomQuestionsRoute);
+app.register(createQuestionRoute);
 
-const port = env.PORT
+const port = env.PORT;
 
 app.listen({ port }, () => {
-  console.log(`HTTP server running on port ${port}!`)
-})
+  console.log(`HTTP server running on port ${port}!`);
+});

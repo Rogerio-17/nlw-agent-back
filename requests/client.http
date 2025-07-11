@@ -1,0 +1,36 @@
+@baseUrl = http://localhost:3333
+
+# @name get_rooms
+GET {{baseUrl}}/rooms
+Content-Type: application/json
+
+###
+
+# @name create_room
+POST {{baseUrl}}/rooms
+Content-Type: application/json
+
+{
+  "name": "New Room 222",
+  "description": "This is a new room for discussion."
+}
+
+###
+
+@roomId = {{create_room.response.body.$.roomId}}
+
+### 
+
+# @name get_rooms_questions
+GET {{baseUrl}}/rooms/{{roomId}}/questions
+Content-Type: application/json
+
+###
+
+# @name create_question
+POST {{baseUrl}}/rooms/{{roomId}}/questions
+Content-Type: application/json
+
+{
+  "question": "What is the purpose of this room?"
+}
